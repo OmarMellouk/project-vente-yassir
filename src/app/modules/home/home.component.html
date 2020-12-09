@@ -10,6 +10,7 @@
                 <tr>
                     <th><label>Id</label></th>
                     <th><label>Nom</label></th>
+                    <th><label>Prix</label></th>
                     <th><label>Action</label></th>
                 </tr>
             </thead>
@@ -17,27 +18,52 @@
                 <tr *ngFor="let row of rows; let i = index">
                     <td>{{row.id}}</td>
                     <td>{{row.name}}</td>
-                    <td (click)="deleterow(i, row.id)">Delete</td>
+                    <td>{{row.prix}}</td>
+                    <td (click)="deleterow(i, row.id, row.prix)">Delete</td>
                 </tr>
             </tbody>
         </table>
-        <a class="btn btn-success" routerLink="/buyprod">Acheté</a>
-        <br>
-        {{qnt}}
+        <span *ngIf="totalprix > 0">Prix total :  {{totalprix}}</span>
+        <hr>
+        <a *ngIf="totalprix > 0" class="btn btn-success" routerLink="/buyprod">Acheter</a>
       </div>
       <div class="col-sm-8" >
           
             <div class="row">
       
-                <div class="col-sm-4" *ngFor="let user of produits | async ; let i=index" (click)="addrow(user.id,user,user.name,user.quantity)">
+                <div class="col-sm-4" *ngFor="let user of produits | async ; let i=index" >
                     <img [src]="user.prodimg" alt="prodimg">
-                    <span>{{user.name}}====>>quantity: {{user.quantity}}</span>
+                    <span>{{user.name}}====>>quantity: {{user.quantity}}<<====>>{{user.prix}}</span>
+                    <hr>
+                    <button class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix)">Acheter</button>
+                    <button class="btn btn-success" (click)="update=true">Modifier</button>
+
+                    <section *ngIf="update" class="modall">
+                        <img [src]="user.prodimg" alt="prodimg">
+                        <label for="prodimg">changer l'image</label>
+                        <input type="file" name="prodimg">
+                        <hr>
+                        <span>{{user.name}}</span>
+                        <label for="name">changer le nom</label>
+                        <input type="text" name="name">
+                        <hr>
+                        <span>{{user.quantity}}</span>
+                        <label for="quantity">changer la quantité</label>
+                        <input type="text" name="quantity">
+                        <hr>
+                        <span>{{user.prix}}</span>
+                        <label for="prix">changer le prix</label>
+                        <input type="text" name="prix">
+                        <hr>
+                    </section>
                 </div>
            
             </div>
          
       </div>
     </div>
+
+   
   </div>
 
 <br><br><br><br><br><br><br><br>

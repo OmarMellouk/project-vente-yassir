@@ -13,20 +13,22 @@ export class HomeComponent implements OnInit {
   produits: Observable<Produit[]>;
   newrow = new Produit();
   rows: Array<any> = [];
-  qnt:number ;
+  totalprix:number = 0;
+  update:boolean = false;
  
   constructor( private produitService: ProduitService) {}
 
   ngOnInit() {
     this.reloadData2();
     this.rows = JSON.parse(localStorage.getItem("token"));
+    this.totalprix = JSON.parse(localStorage.getItem("tokenprix"));
   }
 
   reloadData2() {
     this.produits= this.produitService.getProduit();
   }
 
-  addrow(id, prod, name, quantity){
+  addrow(id, prod, name, quantity, prix){
     if(prod.quantity > 0){
       prod.quantity--;
       this.produitService.putProduit(id,prod).subscribe(()=>this.reloadData2());
@@ -34,11 +36,14 @@ export class HomeComponent implements OnInit {
       this.newrow.id= id;
       this.newrow.name= name;
       this.newrow.quantity= quantity-1;
+      this.newrow.prix= prix;
       this.rows.push(this.newrow);
       localStorage.setItem("token", JSON.stringify(this.rows));
       this.newrow = new Produit();
 
-      this.qnt=10000;
+      this.totalprix=this.totalprix+prix;
+      localStorage.setItem("tokenprix", JSON.stringify(this.totalprix));
+
     }
     else{
       alert("La quantité de "+prod.name+" est vide !" );
@@ -46,10 +51,13 @@ export class HomeComponent implements OnInit {
     
   }
 
-  deleterow(index, id){
+  deleterow(index, id, prix){
     this.produitService.addqntProduit(id).subscribe(()=>this.reloadData2());
     this.rows.splice(index, 1);
     localStorage.setItem("token", JSON.stringify(this.rows));
+
+    this.totalprix=this.totalprix-prix;
+    localStorage.setItem("tokenprix", JSON.stringify(this.totalprix));
   }
 
 }

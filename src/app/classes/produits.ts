@@ -4,5 +4,6 @@ export class Produit{
     name:String;
     prodimg:String;
     quantity:number;
+    prix:number;
 
 }

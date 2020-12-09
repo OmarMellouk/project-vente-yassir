@@ -20,3 +20,12 @@
     background-color: #4CAF50;
     color: white;
   }
+
+  section.modall{
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000;
+  }
