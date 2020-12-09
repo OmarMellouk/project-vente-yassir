@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th><label>Id</label></th>
+                    <th><label>Nom</label></th>
+                    <th><label>Action</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of rows; let i = index">
+                    <td>{{row.id}}</td>
+                    <td>{{row.name}}</td>
+                    <td (click)="deleterow(i, row.id)">Delete</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success" routerLink="/buyprod">Acheté</a>
+        <br>
+        {{qnt}}
+      </div>
+      <div class="col-sm-8" >
+          
+            <div class="row">
+      
+                <div class="col-sm-4" *ngFor="let user of produits | async ; let i=index" (click)="addrow(user.id,user,user.name,user.quantity)">
+                    <img [src]="user.prodimg" alt="prodimg">
+                    <span>{{user.name}}====>>quantity: {{user.quantity}}</span>
+                </div>
+           
+            </div>
+         
+      </div>
+    </div>
+  </div>
+
+<br><br><br><br><br><br><br><br>
+<app-footer></app-footer>

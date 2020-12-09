@@ -1,0 +1,65 @@
+<nav id="b1" class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom">
+<section class="container">
+  
+   <img id="logo1" routerLink="/" src="../../../assets/imgs/shop.webp" style="width:50px;height:50px;"  type="button" 
+   class="rounded-circle ml-5 "  alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+     aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto bg-dark">
+          
+          </ul>
+      <form class="form-inline my-2 my-lg-0 " >
+        <ul class="navbar-nav mr-auto font-weight-bolder bg-light">
+          
+              <li class="nav-item">
+                <a id="a3" class="nav-link" routerLink="/">Home</a>
+         
+              </li>
+          
+              <li class="nav-item">
+                <a id="a4" class="nav-link" routerLink="/buyprod">Vendre</a>
+     
+              </li>
+         
+              <li class="nav-item" >
+                <a style="background-color: rgb(120, 120, 148); color: white;" id="a8" class="nav-link rounded-circle"
+                  (click)="handleLogout()">Logout</a>
+               
+              </li>
+           
+          </ul>
+         </form>
+    </div>
+  
+  </section>
+  </nav>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark" style="color: white;">
+        <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        La sécurité et la santé de tous sont nos priorités.
+<br>
+Vos boutiques sont fermées jusqu’à nouvel ordre.
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-secondary" style="background-color: orangered;display: block;
+        margin : auto;"
+         data-dismiss="modal">FERMER</button>
+      </div>
+    </div>
+  </div>
+</div>
