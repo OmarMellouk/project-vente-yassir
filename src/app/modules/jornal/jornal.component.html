@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row" *ngFor="let jor of Jornalobs | async ; let i=index">
+        <hr><hr>
+        <h1>{{jor.id}}</h1>
+        <hr>
+        {{jor.infos}}
+        <table id="customers" class="table">
+            <thead>
+                <tr>
+                    <th><label>Id</label></th>
+                    <th><label>Nom</label></th>
+                    <th><label>Prix de vente</label></th>
+                    <th><label>Prix d'achat</label></th>
+                    <th><label>Profit</label></th> 
+                </tr>
+            </thead>
+           <!--  <tbody>
+                <tr *ngFor="let row of ( jor.infos ); let i = index">
+                    <td>{{row.id}}</td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.prix}}</td>
+                    <td>{{row.prixachat}}</td>
+                    <td></td>
+                </tr>
+            </tbody> -->
+            <thead>
+                <tr>
+                    <th><label>Total</label></th>
+                    <th><label></label></th>
+                    <th><label>{{jor.prixdvente}}</label></th>
+                    <th><label>{{jor.prixdachat}}</label></th>
+                    <th><label>{{jor.profit}}</label></th>
+                </tr>
+            </thead>
+        </table>
+        
+    </div>
+<button type="button" class="btn btn-link" routerLink="/buyprod">retoure en arrière</button>
+   
+  </div>
+
+<!-- <br><br><br><br><br><br><br><br>
+<app-footer></app-footer> -->

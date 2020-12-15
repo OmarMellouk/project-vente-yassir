@@ -5,13 +5,13 @@
 <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <table id="customers">
+        <table id="customers" class="table">
             <thead>
                 <tr>
                     <th><label>Id</label></th>
                     <th><label>Nom</label></th>
                     <th><label>Prix</label></th>
-                    <th><label>Action</label></th>
+                    <th><label>Supprimer</label></th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,9 @@
                     <td>{{row.id}}</td>
                     <td>{{row.name}}</td>
                     <td>{{row.prix}}</td>
-                    <td (click)="deleterow(i, row.id, row.prix)">Delete</td>
+                    <td class="delete d-flex justify-content-center">
+                        <img src="../../../assets/imgs/delete.webp" (click)="deleterow(i, row.id, row.prix, row.prixachat)" alt="delete">
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -35,36 +37,70 @@
                     <img [src]="user.prodimg" alt="prodimg">
                     <span>{{user.name}}====>>quantity: {{user.quantity}}<<====>>{{user.prix}}</span>
                     <hr>
-                    <button class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix)">Acheter</button>
-                    <button class="btn btn-success" (click)="update=true">Modifier</button>
+                    <button class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix,user.prixachat)">Acheter</button>
+                    <button class="btn btn-success" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
+                    <button class="btn btn-success" (click)="deleteprod(user.id,user.name)">Supprimer</button>
 
-                    <section *ngIf="update" class="modall">
-                        <img [src]="user.prodimg" alt="prodimg">
-                        <label for="prodimg">changer l'image</label>
-                        <input type="file" name="prodimg">
-                        <hr>
-                        <span>{{user.name}}</span>
-                        <label for="name">changer le nom</label>
-                        <input type="text" name="name">
-                        <hr>
-                        <span>{{user.quantity}}</span>
-                        <label for="quantity">changer la quantité</label>
-                        <input type="text" name="quantity">
-                        <hr>
-                        <span>{{user.prix}}</span>
-                        <label for="prix">changer le prix</label>
-                        <input type="text" name="prix">
-                        <hr>
-                    </section>
                 </div>
-           
+                <span class="plus" (click)="addprd=true">
+                    +
+                </span>
+                
             </div>
          
       </div>
     </div>
 
-   
+    <form *ngIf="addprd" class="modall">
+        <span class="close" (click)="addprd=false; imgchnge=false;">X</span>
+        <img *ngIf="imgchnge" [src]="newprod.prodimg" alt="prodimg">
+        <br>
+        <label for="prodimg">l'image</label>
+        <input class="form-control" type="file" name="prodimg" [(ngModel)]="newprod.prodimg" (change)="imgadd()">
+        <hr>
+        
+        <label for="name">le nom</label>
+        <input class="form-control" type="text" name="name" [(ngModel)]="newprod.name">
+        <hr>
+        
+        <label for="quantity">la quantité</label>
+        <input class="form-control" type="text" name="quantity" [(ngModel)]="newprod.quantity">
+        <hr>
+        
+        <label for="prix">le prix de vente</label>
+        <input class="form-control" type="text" name="prix" [(ngModel)]="newprod.prix">
+
+        <label for="prixachat">le prix d'achat</label>
+        <input class="form-control" type="text" name="prixachat" [(ngModel)]="newprod.prixachat">
+        <hr>
+        <button class="btn btn-success" (click)="addprod()">Ajouter</button>
+    </form>
+
+    <section *ngIf="update" class="modall">
+        <span class="close" (click)="update=false">X</span>
+        <img [src]="img" alt="prodimg">
+        <br>
+        <label for="imgmodal">changer l'image</label>
+        <input class="form-control" type="file" name="imgmodal" [(ngModel)]="imgmodal" (change)="imgchange()">
+        <hr>
+        
+        <label for="namemodal">changer le nom</label>
+        <input class="form-control" type="text" name="namemodal" [(ngModel)]="namemodal">
+        <hr>
+        
+        <label for="quantitymodal">changer la quantité</label>
+        <input class="form-control" type="text" name="quantitymodal" [(ngModel)]="quantitymodal">
+        <hr>
+        
+        <label for="prixmodal">le prix de vente</label>
+        <input class="form-control" type="text" name="prixmodal" [(ngModel)]="prixmodal">
+
+        <label for="prixachatmodal">le prix d'achat</label>
+        <input class="form-control" type="text" name="prixachatmodal" [(ngModel)]="prixachatmodal">
+        <hr>
+        <button class="btn btn-success" (click)="updateInfoBD()">Modifier</button>
+    </section>
   </div>
 
-<br><br><br><br><br><br><br><br>
-<app-footer></app-footer>
+<!-- <br><br><br><br><br><br><br><br>
+<app-footer></app-footer> -->

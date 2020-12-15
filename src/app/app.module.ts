@@ -12,6 +12,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BuyprodComponent } from './modules/buyprod/buyprod.component';
+import { JornalComponent } from './modules/jornal/jornal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BuyprodComponent } from './modules/buyprod/buyprod.component';
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    BuyprodComponent
+    BuyprodComponent,
+    JornalComponent
   ],
   imports: [
     BrowserModule,
