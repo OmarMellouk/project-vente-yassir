@@ -16,6 +16,10 @@ public class produits implements Serializable{
 	private String name;
 	private String Prodimg;
 	private Long quantity;
+	private Double prix;
+	private Double prixachat;
+	private String ref;
+	
 	
 	public Long getId() {
 		return id;
@@ -41,16 +45,39 @@ public class produits implements Serializable{
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
+	public Double getPrix() {
+		return prix;
+	}
+	public void setPrix(Double prix) {
+		this.prix = prix;
+	}
+	
+	public String getRef() {
+		return ref;
+	}
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
+	
+	public Double getPrixachat() {
+		return prixachat;
+	}
+	public void setPrixachat(Double prixachat) {
+		this.prixachat = prixachat;
+	}
+	
 	public produits() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public produits(String name, String prodimg, Long quantity) {
+	public produits(String name, String prodimg, Long quantity, Double prix, Double prixachat, String ref) {
 		super();
 		this.name = name;
-		this.Prodimg = prodimg;
+		Prodimg = prodimg;
 		this.quantity = quantity;
+		this.prix = prix;
+		this.prixachat = prixachat;
+		this.ref = ref;
 	}
-	
 }
 

@@ -70,6 +70,8 @@ public class ProduitsRestRepository {
 			produit.setName(produitDetails.getName());
 			produit.setProdimg(produitDetails.getProdimg());
 			produit.setQuantity(produitDetails.getQuantity());
+			produit.setPrix(produitDetails.getPrix());
+			produit.setPrixachat(produitDetails.getPrixachat());
 	        final produits updatedProduit = prodRepository.save(produit);
 	        return prodRepository.save(updatedProduit);
 	    }
