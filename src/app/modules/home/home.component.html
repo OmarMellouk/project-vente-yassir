@@ -8,19 +8,19 @@
         <table id="customers" class="table">
             <thead>
                 <tr>
-                    <th><label>Id</label></th>
-                    <th><label>Nom</label></th>
+                    <th><label>Quantité</label></th>
+                    <th><label>Produit</label></th>
                     <th><label>Prix</label></th>
                     <th><label>Supprimer</label></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let row of rows; let i = index">
-                    <td>{{row.id}}</td>
+                    <td>{{row.quantityacht}}</td>
                     <td>{{row.name}}</td>
                     <td>{{row.prix}}</td>
                     <td class="delete d-flex justify-content-center">
-                        <img src="../../../assets/imgs/delete.webp" (click)="deleterow(i, row.id, row.prix, row.prixachat)" alt="delete">
+                        <img src="../../../assets/imgs/delete.webp" (click)="deleterow(i, row.id, row.prix, row.prixachat, row.quantityacht)" alt="delete">
                     </td>
                 </tr>
             </tbody>
@@ -31,21 +31,46 @@
       </div>
       <div class="col-sm-8" >
           
-            <div class="row">
+        <nav class="navbar">
+            <input type="text" class="form-control" name="search" [(ngModel)]="search" (ngModelChange)="Search()" placeholder="Recherche">
+        </nav>
+            <div *ngIf="pagehidden" class="row">
       
-                <div class="col-sm-4" *ngFor="let user of produits | async ; let i=index" >
+                <div class="col-sm-4" *ngFor="let user of produits | async | paginate : {id:'listprod' ,itemsPerPage:5,currentPage:p} ; let i=index" >
                     <img [src]="user.prodimg" alt="prodimg">
                     <span>{{user.name}}====>>quantity: {{user.quantity}}<<====>>{{user.prix}}</span>
                     <hr>
-                    <button class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix,user.prixachat)">Acheter</button>
+                    <button *ngIf="user.quantityacht > 0" class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.quantityacht,user.prix,user.prixachat)">Acheter</button>
                     <button class="btn btn-success" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
                     <button class="btn btn-success" (click)="deleteprod(user.id,user.name)">Supprimer</button>
-
+                    <hr>
+                    <label for="quantityacht">La quantité acheter</label>
+                    <input type="number" class="form-control" name="quantityacht" [(ngModel)]="user.quantityacht" min="1">
                 </div>
                 <span class="plus" (click)="addprd=true">
                     +
                 </span>
+                <br>
+                <hr>
+                <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <div *ngIf="searchhidden" class="row">
+     
+                <div class="col-sm-4" *ngFor="let user of rowssearch | paginate : {id:'listprod' ,itemsPerPage:5,currentPage:p} ; let i=index" >
+                    <img [src]="user.prodimg" alt="prodimg">
+                    <span>{{user.name}}====>>quantity: {{user.quantity}}<<====>>{{user.prix}}</span>
+                    <hr>
+                    <button *ngIf="user.quantityacht > 0" class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix,user.prixachat)">Acheter</button>
+                    <button class="btn btn-success" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
+                    <button class="btn btn-success" (click)="deleteprod(user.id,user.name)">Supprimer</button>
+                    <hr>
+                    <input type="number" class="form-control" name="quantityacht" [(ngModel)]="user.quantityacht" min="1">
+
+                </div>
                 
+                <br>
+                <hr>
+                <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
             </div>
          
       </div>

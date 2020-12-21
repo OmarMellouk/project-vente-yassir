@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class ProduitService {
 
   private baseUrl = 'http://localhost:8080/produits';
+  private baseUrl1 = 'http://localhost:8080/chercherProduits';
   
   echangerows: Array<any>;
   echangeprix: number;
@@ -34,6 +35,10 @@ export class ProduitService {
 
   addqntProduit(id:number){
     return this.http.put(`${this.baseUrl}/addqnt/${id}`,{responseType:'text' as 'json'});
+  }
+
+  chercher(name: String): Observable<any> {
+    return this.http.get(`${this.baseUrl1}?name=${name}`,{responseType:'text' as 'json'});
   }
 
 }

@@ -13,6 +13,10 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BuyprodComponent } from './modules/buyprod/buyprod.component';
 import { JornalComponent } from './modules/jornal/jornal.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { PrintComponent } from './modules/buyprod/print/print.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,17 @@ import { JornalComponent } from './modules/jornal/jornal.component';
     HeaderComponent,
     FooterComponent,
     BuyprodComponent,
-    JornalComponent
+    JornalComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule, 
+    Ng2OrderModule, 
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

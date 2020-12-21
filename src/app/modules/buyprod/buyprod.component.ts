@@ -15,6 +15,7 @@ export class BuyprodComponent implements OnInit {
   newjornal = new Jornal();
   jornals: Array<any> = [];
   rows: Array<any> = [];
+  rowsj: Array<any> = [];
   totalprix: number;
   totalprixachat: number;
   prixcln: number = 0;
@@ -30,6 +31,7 @@ export class BuyprodComponent implements OnInit {
     /* 
     this.rows = this.prodchange.echangerows;
     this.totalprix = this.prodchange.echangeprix; */
+
   }
 
  /*  reloadJornal(){
@@ -42,6 +44,13 @@ export class BuyprodComponent implements OnInit {
     this.newjornal.profit = this.totalprix - this.totalprixachat;
     this.newjornal.infos = JSON.stringify(localStorage.getItem("token"));
     this.prixjornalservice.addJornal(this.newjornal).subscribe();
+    localStorage.setItem("tokenprixcln", JSON.stringify(this.prixcln));
+
+    if (JSON.parse(localStorage.getItem("tokenjornal")) != null) {
+      this.rowsj = JSON.parse(localStorage.getItem("tokenjornal"));
+    }
+    this.rowsj.push(this.rows);
+    localStorage.setItem("tokenjornal", JSON.stringify(this.rowsj));
   }
 
 }

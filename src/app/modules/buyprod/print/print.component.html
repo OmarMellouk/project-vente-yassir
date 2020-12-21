@@ -3,6 +3,7 @@
 <br><br><br><br><br><br><br><br>
 
 <div class="container">
+    <p>Date de la command : {{myDate | date:'dd/MM/yyyy  HH:mm:ss'}}</p>
     <div class="row">
         <table id="customers" class="table">
             <thead>
@@ -28,18 +29,14 @@
         
         <br>
         <hr>
-        <label for="prixcln">le prix payer</label>
-        <input class="form-control" type="text" name="prixcln" [(ngModel)]="prixcln">
+        <span>le prix payer : {{prixcln}}</span>
         <br>
+        <hr>
         <span>le reste : {{prixcln-totalprix}}</span>
         <hr>
-        <a *ngIf="prixcln >= totalprix" class="btn btn-success" (click)="savejornal();" routerLink="/print">Acheter</a>
-        <hr>
-        <button type="button" class="btn btn-link" routerLink="/">retoure en arrière</button>
+        <a class="btn btn-success" (click)="print()" >Imprimer</a>
+        
     </div>
 
    
   </div>
-
-<!-- <br><br><br><br><br><br><br><br>
-<app-footer></app-footer> -->

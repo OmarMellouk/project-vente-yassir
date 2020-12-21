@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    /* private authenticationService: AuthenticationService */) {   }
+    private authenticationService: AuthenticationService) {   }
 
   ngOnInit() {
    
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     
      
     
-    /* this.authenticationService.authenticationService(this.username, this.password).subscribe((result)=> {
+    this.authenticationService.authenticationService(this.username, this.password).subscribe((result)=> {
       
       this.invalidLogin = false;
       this.loginSuccess = true;
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     }, () => {
       this.invalidLogin = true;
       this.loginSuccess = false;
-    }); */      
+    });      
   }
 
 

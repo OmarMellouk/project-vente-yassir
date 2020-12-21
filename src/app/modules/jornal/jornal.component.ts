@@ -11,6 +11,7 @@ import { PrixjornalService } from 'src/app/services/prixjornal.service';
 export class JornalComponent implements OnInit {
 
   Jornalobs: Observable<Jornal[]>;
+  jornals: Array<any> = [];
   rows: Array<any> = [];
   totalprix: number;
   totalprixachat: number;
@@ -18,11 +19,17 @@ export class JornalComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadJornal();
-   
-    /* this.rows = JSON.parse(localStorage.getItem("token"));
+    /* console.log('ppppppppp' +JSON.parse(localStorage.getItem("token")));
+    this.rows = JSON.parse(localStorage.getItem("tokenjornal"));
+    this.rows.push(JSON.parse(localStorage.getItem("token")));
     this.totalprix = JSON.parse(localStorage.getItem("tokenprix"));
     this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat"));
-    console.log('ttttjjjj :: '+JSON.parse(localStorage.getItem("tokenjornal"))); */
+    console.log('ttttjjjj :: '+JSON.parse(localStorage.getItem("tokenjornal")));
+
+    localStorage.setItem("tokenjornal", JSON.stringify(this.rows));
+    console.log('iiiiiiiiiiiiiii :: '+this.rows); */
+
+    this.jornals = JSON.parse(localStorage.getItem("tokenjornal"));
   }
 
   reloadJornal(){
