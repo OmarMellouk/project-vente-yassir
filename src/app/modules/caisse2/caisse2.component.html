@@ -1,0 +1,84 @@
+<app-header></app-header>
+
+<br><br><br><br><br><br><br><br>
+
+
+<div class="container">
+    <button class="moin" (click)="mnprd = true">-</button>
+    <button class="plus" (click)="addprd = true">+</button>
+    <br>
+    <hr>
+    <label for="firstdate">Date de début</label>
+    <input type="datetime-local" class="form-control" name="firstdate" [(ngModel)]="firstdate" >
+    <label for="lastdate">Date de fin</label>
+    <input type="datetime-local" class="form-control" name="lastdate" [(ngModel)]="lastdate" >
+    <button class="form-control" (click)="Searchdate()">Chercher</button>
+    <div class="row" >
+        <table id="customers" class="table">
+            <thead>
+                <tr>
+                    <th><label></label></th>
+                    <th><label>Quantité</label></th>
+                    <th><label>Produit</label></th>
+                    <th><label>Profit</label></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let jor of jornals ; let i=index">
+                <tr *ngFor="let row of jor.rows; let j = index">
+                    <td></td>
+                    <td>{{row.quantityacht}}</td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.prix-row.prixachat}} DH</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr *ngFor="let pl of pluss; let k = index">
+                    <td></td>
+                    <td></td>
+                    <td>{{pl.name}}</td>
+                    <td>{{pl.prix}} DH</td>
+                </tr>
+                <tr *ngFor="let mn of mnpluss; let l = index">
+                    <td></td>
+                    <td></td>
+                    <td>{{mn.name}}</td>
+                    <td class="mnprix">-{{mn.prix}} DH</td>
+                </tr>
+            </tbody>
+            <!-- <thead>
+                <tr>
+                    <th><label>Total</label></th>
+                    <th><label>{{jor.totalqnt}}</label></th>
+                    <th><label></label></th>
+                    <th><label>{{jor.totalprix}}</label></th>
+                </tr>
+            </thead> -->
+        </table>
+        
+    </div>
+   
+    <form *ngIf="addprd" class="modall">
+        <span class="close" (click)="addprd=false;">X</span>
+        <br>
+        <label for="nameplus">le nom</label>
+        <input class="form-control" type="text" name="nameplus" [(ngModel)]="nameplus">
+        <hr>
+        
+        <label for="prixplus">le prix</label>
+        <input class="form-control" type="text" name="prixplus" [(ngModel)]="prixplus">
+
+        <button class="btn btn-success" (click)="addplus()">Ajouter</button>
+    </form>
+    <form *ngIf="mnprd" class="modall">
+        <span class="close" (click)="mnprd=false;">X</span>
+        <br>
+        <label for="nameplus">le nom</label>
+        <input class="form-control" type="text" name="nameplus" [(ngModel)]="nameplus">
+        <hr>
+        
+        <label for="prixplus">le prix</label>
+        <input class="form-control" type="text" name="prixplus" [(ngModel)]="prixplus">
+
+        <button class="btn btn-success" (click)="mnplus()">Ajouter</button>
+    </form>
+  </div>

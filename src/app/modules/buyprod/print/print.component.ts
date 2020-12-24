@@ -11,12 +11,13 @@ import { Router } from '@angular/router';
 export class PrintComponent implements OnInit {
 
   rows: Array<any> = [];
+  datestock: Array<any> = [];
   totalprix: number;
   totalprixachat: number;
   prixcln: number ;
   myDate = new Date();
 
-  constructor(private router: Router, private datePipe: DatePipe) { 
+  constructor(private router: Router/* , private datePipe: DatePipe */) { 
     /* this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd'); */
   }
 
@@ -26,6 +27,18 @@ export class PrintComponent implements OnInit {
     
     this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat"));
     this.prixcln = JSON.parse(localStorage.getItem("tokenprixcln"));
+
+    /* if (JSON.parse(localStorage.getItem("datestock")) != null) {
+      this.datestock = JSON.parse(localStorage.getItem("datestock"));
+    }
+    this.datestock.push(this.myDate);
+    localStorage.setItem("datestock", JSON.stringify(this.datestock)); */
+
+    /* if (JSON.parse(localStorage.getItem("tokenjornal")) != null) {
+      this.datestock = JSON.parse(localStorage.getItem("tokenjornal"));
+    }
+    this.datestock.push(this.rows);
+    localStorage.setItem("tokenjornal", JSON.stringify(this.datestock)); */
   }
 
   print(){
@@ -35,6 +48,7 @@ export class PrintComponent implements OnInit {
     localStorage.setItem("tokenprix", JSON.stringify(0));
     localStorage.setItem("tokenprixachat", JSON.stringify(0));
     localStorage.setItem("tokenprixcln", JSON.stringify(0));
+    localStorage.setItem("tokenqnt", JSON.stringify(0));
     this.router.navigate(['/']);
   }
 }

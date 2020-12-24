@@ -3,14 +3,19 @@
 <br><br><br><br><br><br><br><br>
 
 <div class="container">
+    <label for="firstdate">Date de début</label>
+    <input type="datetime-local" class="form-control" name="firstdate" [(ngModel)]="firstdate" >
+    <label for="lastdate">Date de fin</label>
+    <input type="datetime-local" class="form-control" name="lastdate" [(ngModel)]="lastdate" >
+    <button class="form-control" (click)="Searchdate()">Chercher</button>
     <div class="row" *ngFor="let jor of jornals ; let i=index">
-        <hr><hr>
-        <h1>{{Jornalobs.id}}</h1>
         <hr>
-        <!-- {{jor[i].infos}} -->
+        <h5>Code de la command : {{jor.id}}   --  --  La date de la command : {{jor.date | date:'dd/MM/yyyy  HH:mm:ss'}}</h5>
+        <hr>
         <table id="customers" class="table">
             <thead>
                 <tr>
+                    <th><label></label></th>
                     <th><label>Quantité</label></th>
                     <th><label>Produit</label></th>
                     <th><label>Prix de vente</label></th>
@@ -19,7 +24,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let row of jor; let j = index">
+                <tr *ngFor="let row of jor.rows; let j = index">
+                    <td></td>
                     <td>{{row.quantityacht}}</td>
                     <td>{{row.name}}</td>
                     <td>{{row.prix}}</td>
@@ -30,10 +36,11 @@
             <thead>
                 <tr>
                     <th><label>Total</label></th>
+                    <th><label>{{jor.totalqnt}}</label></th>
                     <th><label></label></th>
-                    <th><label>{{Jornalobs.prixdvente}}</label></th>
-                    <th><label>{{Jornalobs.prixdachat}}</label></th>
-                    <th><label>{{Jornalobs.profit}}</label></th>
+                    <th><label>{{jor.totalprix}}</label></th>
+                    <th><label>{{jor.totalprixachat}}</label></th>
+                    <th><label>{{jor.totalprix-jor.totalprixachat}}</label></th>
                 </tr>
             </thead>
         </table>

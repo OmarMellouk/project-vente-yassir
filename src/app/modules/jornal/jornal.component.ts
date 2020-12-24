@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Jornal } from 'src/app/classes/jornal';
-import { PrixjornalService } from 'src/app/services/prixjornal.service';
 
 @Component({
   selector: 'app-jornal',
@@ -10,29 +7,50 @@ import { PrixjornalService } from 'src/app/services/prixjornal.service';
 })
 export class JornalComponent implements OnInit {
 
-  Jornalobs: Observable<Jornal[]>;
   jornals: Array<any> = [];
-  rows: Array<any> = [];
-  totalprix: number;
-  totalprixachat: number;
-  constructor(public prixjornalservice: PrixjornalService) { }
+  totalprix:  Array<any> = [];
+  totalprixachat:  Array<any> = [];
+  totalqnt: Array<any> = [];
+  datestock: Array<any> = [];
+
+  firstdate: any;
+  lastdate: any;
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.reloadJornal();
-    /* console.log('ppppppppp' +JSON.parse(localStorage.getItem("token")));
-    this.rows = JSON.parse(localStorage.getItem("tokenjornal"));
-    this.rows.push(JSON.parse(localStorage.getItem("token")));
-    this.totalprix = JSON.parse(localStorage.getItem("tokenprix"));
-    this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat"));
-    console.log('ttttjjjj :: '+JSON.parse(localStorage.getItem("tokenjornal")));
-
-    localStorage.setItem("tokenjornal", JSON.stringify(this.rows));
-    console.log('iiiiiiiiiiiiiii :: '+this.rows); */
 
     this.jornals = JSON.parse(localStorage.getItem("tokenjornal"));
+
+   /*  this.totalqnt = JSON.parse(localStorage.getItem("tokenqnt2"));
+    this.totalprix = JSON.parse(localStorage.getItem("tokenprix2"));
+    this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat2"));
+    this.datestock = JSON.parse(localStorage.getItem("datestock")); */
+
+    /* localStorage.setItem("tokenjornal", JSON.stringify([]));
+    localStorage.setItem("tokenqnt2", JSON.stringify([]));
+    localStorage.setItem("tokenprix2", JSON.stringify([]));
+    localStorage.setItem("tokenprixachat2", JSON.stringify([])); 
+    localStorage.setItem("datestock", JSON.stringify([])); 
+    */
+
   }
 
-  reloadJornal(){
-    this.Jornalobs= this.prixjornalservice.getJornal();
+  Searchdate(){ 
+    
+    if(this.firstdate != "" || this.lastdate != ""){
+      this.jornals = this.jornals.filter(
+        m => { return new Date(m.date) >= new Date(this.firstdate) && new Date(m.date) <= new Date(this.lastdate)}
+        );
+    }else{ 
+      this.ngOnInit();
+    }
+    /* filter(
+    m => new Date(m.date) >= new Date(startDate) && new Date(m.date) <= new Date(endDate)
+    ); */
+
+    /* console.log('date 1 :' + this.firstdate);
+    console.log('date 2 : ' + this.lastdate); */
   }
+  
 }

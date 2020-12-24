@@ -17,6 +17,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {Ng2OrderModule} from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PrintComponent } from './modules/buyprod/print/print.component';
+import { ProduitsComponent } from './modules/produits/produits.component';
+import { Caisse2Component } from './modules/caisse2/caisse2.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PrintComponent } from './modules/buyprod/print/print.component';
     FooterComponent,
     BuyprodComponent,
     JornalComponent,
-    PrintComponent
+    PrintComponent,
+    ProduitsComponent,
+    Caisse2Component
   ],
   imports: [
     BrowserModule,

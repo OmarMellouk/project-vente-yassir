@@ -27,10 +27,6 @@ export class LoginComponent implements OnInit {
      history.pushState(null, null, location.href);
      window.onpopstate=function(){ history.go(0);}
     
-   
-    
-    
-    
   }
   
   handleLogin() {
@@ -43,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.loginSuccess = true;
       this.successMessage = 'Login Successful.';
       
-      this.router.navigate(['/']);
+      this.router.navigate(['/caisse']);
        
     }, () => {
       this.invalidLogin = true;

@@ -4,12 +4,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { BuyprodComponent } from './modules/buyprod/buyprod.component';
 import { PrintComponent } from './modules/buyprod/print/print.component';
+import { Caisse2Component } from './modules/caisse2/caisse2.component';
 import { HomeComponent } from './modules/home/home.component';
 import { JornalComponent } from './modules/jornal/jornal.component';
+import { ProduitsComponent } from './modules/produits/produits.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'produit', component:ProduitsComponent},
+  {path:'caisse', component:Caisse2Component},
   {path:'buyprod',component:BuyprodComponent},
   {path:'print',component:PrintComponent},
   {path:'jornal',component:JornalComponent},
