@@ -51,6 +51,7 @@ export class ProduitsComponent implements OnInit {
   qntinput:boolean = false;
   prixinput:boolean = false;
 
+  rowststgid:number;
   constructor( private produitService: ProduitService , public prodchange: ProduitService) {}
 
   ngOnInit() {
@@ -59,6 +60,7 @@ export class ProduitsComponent implements OnInit {
     this.totalprix = JSON.parse(localStorage.getItem("tokenprix"));
     this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat"));
     this.totalqnt = JSON.parse(localStorage.getItem("tokenqnt"));
+  
   }
 
   reloadData2() {
@@ -66,10 +68,13 @@ export class ProduitsComponent implements OnInit {
     this.produits.subscribe(res => 
       {
           this.rowststg = res;
+          this.rowststgid = this.rowststg[this.rowststg.length-1].id;
       });
   }
 
   addprod(){
+
+    this.newprod.ref = 1000001+this.rowststgid;
     this.produitService.addProduit(this.newprod).subscribe(()=>this.reloadData2());
     this.addprd=false;
     this.imgchnge=false;

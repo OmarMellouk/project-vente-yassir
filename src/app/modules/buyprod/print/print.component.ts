@@ -41,6 +41,16 @@ export class PrintComponent implements OnInit {
     localStorage.setItem("tokenjornal", JSON.stringify(this.datestock)); */
   }
 
+
+  vendre(){
+
+    localStorage.setItem("token", JSON.stringify([]));
+    localStorage.setItem("tokenprix", JSON.stringify(0));
+    localStorage.setItem("tokenprixachat", JSON.stringify(0));
+    localStorage.setItem("tokenprixcln", JSON.stringify(0));
+    localStorage.setItem("tokenqnt", JSON.stringify(0));
+    this.router.navigate(['/']);
+  }
   print(){
     window.print();
 

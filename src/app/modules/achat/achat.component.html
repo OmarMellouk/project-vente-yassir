@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+      
+        <table id="customers" class="table">
+            <thead>
+                <tr>
+                    <th><label>Name</label></th>
+                    <th><label>prix</label></th>
+                    <th><label>Quantité</label></th>
+                    <th><label>Add</label></th>
+                    <th><label>Delete</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="name" [(ngModel)]="newAttribute.name" (change)="addprix()">
+                            <option  *ngFor="let row of rowststg; let i = index" [ngValue]="row.name">{{row.name}}</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="quantity" [(ngModel)]="newAttribute.prix" min="1"></td>
+                    <td><input type="number" name="quantity" [(ngModel)]="newAttribute.quantity" (change)="multprix()" min="1"></td>
+                    <td><button class="btn-success" (click)="addrow()">+</button></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr *ngFor="let fd of rowsachat; let i = index">
+                    <td>{{fd.name}}</td>
+                    <td>{{fd.prix}}</td>
+                    <td>{{fd.quantity}}</td>
+                    <td></td>
+                    <td><button class="btn-danger" (click)="deleterow(fd.id,fd.name)">-</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+       <hr>
+        <a class="btn btn-success" (click)="acheter()" routerLink="/produit" >Acheter</a>
+        <a class="btn btn-success" (click)="print()" >Acheter et imprimer bon de commande</a>
+    </div>
+   
+  </div>

@@ -26,12 +26,13 @@
         
             <div *ngIf="pagehidden" class="row">
       
-                <div class="col-sm-4 prod_class" *ngFor="let user of rowststg | paginate : {id:'listprod' ,itemsPerPage:5,currentPage:p} ; let i=index" >
-                    <div>
+                <div class="col-sm-2 " *ngFor="let user of rowststg | paginate : {id:'listprod' ,itemsPerPage:50,currentPage:p} ; let i=index" >
+                    <div class="prod_class">
                         <img [src]="user.prodimg" alt="prodimg">
                         <p>{{user.name}}</p>
                         <p>quantity: {{user.quantity}}</p>
                         <p>{{user.prix}} DH</p>
+                        <span>{{user.ref}}</span>
                         <hr>
                         <button class="btn btn-success form-control" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
                         <button class="btn btn-success form-control" (click)="deleteprod(user.id,user.name)">Supprimer</button>

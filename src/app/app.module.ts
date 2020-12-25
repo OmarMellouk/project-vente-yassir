@@ -19,6 +19,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { PrintComponent } from './modules/buyprod/print/print.component';
 import { ProduitsComponent } from './modules/produits/produits.component';
 import { Caisse2Component } from './modules/caisse2/caisse2.component';
+import { AchatComponent } from './modules/achat/achat.component';
+import { StockComponent } from './modules/stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { Caisse2Component } from './modules/caisse2/caisse2.component';
     JornalComponent,
     PrintComponent,
     ProduitsComponent,
-    Caisse2Component
+    Caisse2Component,
+    AchatComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,
