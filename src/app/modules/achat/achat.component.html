@@ -8,9 +8,12 @@
         <table id="customers" class="table">
             <thead>
                 <tr>
+                    <th><label>Fournisseur</label></th>
                     <th><label>Name</label></th>
-                    <th><label>prix</label></th>
+                    <th><label>Prix</label></th>
                     <th><label>Quantité</label></th>
+                    <th><label>ttc</label></th>
+                    <th><label>noir</label></th>
                     <th><label>Add</label></th>
                     <th><label>Delete</label></th>
                 </tr>
@@ -18,21 +21,39 @@
             <tbody>
                 <tr>
                     <td>
+                        <select name="frn" [(ngModel)]="newAttribute.frn">
+                            <option  *ngFor="let row of rowsfrn; let i = index" [ngValue]="row.name">{{row.name}}</option>
+                        </select>
+                    </td>
+                    <td>
                         <select name="name" [(ngModel)]="newAttribute.name" (change)="addprix()">
                             <option  *ngFor="let row of rowststg; let i = index" [ngValue]="row.name">{{row.name}}</option>
                         </select>
                     </td>
                     <td><input type="number" name="quantity" [(ngModel)]="newAttribute.prix" min="1"></td>
                     <td><input type="number" name="quantity" [(ngModel)]="newAttribute.quantity" (change)="multprix()" min="1"></td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" (click)="ttc()">
+                        </div>
+                        <!-- <input type="checkbox" name="ttc"  (click)="ttc()"> --></td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" (click)="noir()">
+                        </div>
+                        <!-- <input type="checkbox" name="ttc"  (click)="noir()"> --></td>
                     <td><button class="btn-success" (click)="addrow()">+</button></td>
                     <td></td>
                 </tr>
             </tbody>
             <tbody>
                 <tr *ngFor="let fd of rowsachat; let i = index">
+                    <td>{{fd.frn}}</td>
                     <td>{{fd.name}}</td>
                     <td>{{fd.prix}}</td>
                     <td>{{fd.quantity}}</td>
+                    <td>{{fd.ttc}}</td>
+                    <td>{{fd.noir}}</td>
                     <td></td>
                     <td><button class="btn-danger" (click)="deleterow(fd.id,fd.name)">-</button></td>
                 </tr>
@@ -40,7 +61,7 @@
         </table>
 
        <hr>
-        <a class="btn btn-success" (click)="acheter()" routerLink="/produit" >Acheter</a>
+        <a class="btn btn-success" (click)="acheter()" >Acheter</a>
         <a class="btn btn-success" (click)="print()" >Acheter et imprimer bon de commande</a>
     </div>
    

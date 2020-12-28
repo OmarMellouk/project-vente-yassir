@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AchatService } from 'src/app/services/achat.service';
 
 @Component({
   selector: 'app-stock',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockComponent implements OnInit {
 
-  constructor() { }
+  rowsachat: Array<any> = [];
+  dateachat:any;
+  constructor(public achatservice:AchatService) { }
 
   ngOnInit(): void {
+    this.reloadachat();
   }
 
+  reloadachat() {
+    this.achatservice.getAchat().subscribe(res => 
+      {
+          this.rowsachat = res;
+      });
+  }
 }

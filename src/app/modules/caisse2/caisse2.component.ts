@@ -13,6 +13,7 @@ export class Caisse2Component implements OnInit {
   pluss: Array<any> = [];
   mnpluss: Array<any> = [];
   jornals: Array<any> = [];
+  jorcaisse: Array<any> = [];
   totalprix:  Array<any> = [];
   totalprixachat:  Array<any> = [];
   totalqnt: Array<any> = [];
@@ -66,5 +67,9 @@ export class Caisse2Component implements OnInit {
     this.mnpluss.push(this.newmoin);
     this.mnprd = false;
     localStorage.setItem("tokenmnpluss", JSON.stringify(this.mnpluss));
+  }
+
+  ferm(){
+
   }
 }

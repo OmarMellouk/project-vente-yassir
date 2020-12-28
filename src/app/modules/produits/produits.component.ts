@@ -30,15 +30,23 @@ export class ProduitsComponent implements OnInit {
   id:number;
   img:string ="";
   name:string ="";
-  quantity:number;
+  qntttc:number;
+  qntnoir:number;
   prix:number;
   prixachat:number;
+  ref:number;
+  cat:string ="";
+  unit:string ="";
 
   imgmodal:string ="";
   namemodal:string ="";
-  quantitymodal:number ;
+  qntttcmodal:number ;
+  qntnoirmodal:number ;
   prixmodal:number ;
   prixachatmodal:number ;
+  refmodal:number;
+  catmodal:string="";
+  unitmodal:string="";
  
   i:number = 0;
   p :number = 1;
@@ -81,20 +89,28 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  updateInfo(id ,img, name, quantity, prix, prixachat){
+  updateInfo(id ,img, name, qntttc,qntnoir, prix, prixachat, ref, cat, unit){
     this.update=true;
     this.id = id;
     this.img = img;
     this.name = name;
-    this.quantity = quantity;
+    this.qntttc = qntttc;
+    this.qntnoir = qntnoir;
     this.prix = prix;
     this.prixachat = prixachat;
+    this.ref = ref;
+    this.cat = cat;
+    this.unit = unit;
 
     this.imgmodal = img;
     this.namemodal = name;
-    this.quantitymodal = quantity;
+    this.qntttcmodal = qntttc;
+    this.qntnoirmodal = qntnoir;
     this.prixmodal = prix;
     this.prixachatmodal = prixachat;
+    this.refmodal = ref;
+    this.catmodal = cat;
+    this.unitmodal = unit;
 
   }
 
@@ -102,9 +118,13 @@ export class ProduitsComponent implements OnInit {
     this.rowupdate.id=this.id;
     this.rowupdate.name=this.namemodal;
     this.rowupdate.prodimg="../../../assets/imgs/"+this.imgmodal.replace(/C:\\fakepath\\/, '');
-    this.rowupdate.quantity=this.quantitymodal;
+    this.rowupdate.qntttc=this.qntttcmodal;
+    this.rowupdate.qntnoir=this.qntnoirmodal;
     this.rowupdate.prix=this.prixmodal;
     this.rowupdate.prixachat=this.prixachatmodal;
+    this.rowupdate.ref=this.refmodal;
+    this.rowupdate.cat=this.catmodal;
+    this.rowupdate.unit=this.unitmodal;
     this.produitService.putProduit(this.id,this.rowupdate).subscribe(()=>this.reloadData2());
     this.update=false;
   }

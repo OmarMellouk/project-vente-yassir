@@ -1,0 +1,135 @@
+<app-header></app-header>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+      
+      <div >
+          
+        <nav class="navbar">
+            
+            <div class="dropdown">
+                <button class="dropbtn">Rechercher par :</button>
+                <div class="dropdown-content">
+                    <li (click)="nameinput = true;">Nom</li>
+                </div>
+            </div>
+            <hr>
+            <input *ngIf="nameinput" type="text" class="form-control" name="searchname" [(ngModel)]="searchname" (input)="Searchname()" placeholder="Recherche par nom">
+            <hr>
+        </nav>
+        
+            <div *ngIf="pagehidden" class="row">
+      
+                <div class="col-sm-2 " *ngFor="let user of rowststg | paginate : {id:'listprod' ,itemsPerPage:50,currentPage:p} ; let i=index" >
+                    <div class="prod_class">
+                        <img [src]="user.clnimg" alt="clnimg">
+                        <p>{{user.name}}</p>
+                       
+                        <hr>
+                        <button class="btn btn-success form-control" (click)="updateInfo(user.id,user.clnimg,user.name,user.ice,user.addfact,user.addlaivr,user.plafond,user.solde,user.tel)">Modifier</button>
+                        <button class="btn btn-success form-control" (click)="deleteprod(user.id,user.name)">Supprimer</button>
+                    </div>
+                </div>
+                <span class="plus" (click)="addprd=true">
+                    +
+                </span>
+                <br>
+                <hr>
+                <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <!-- <div *ngIf="searchhidden" class="row">
+     
+                <div class="col-sm-4" *ngFor="let user of rowssearch | paginate : {id:'listprod' ,itemsPerPage:5,currentPage:p} ; let i=index" >
+                    <img [src]="user.prodimg" alt="prodimg">
+                    <span>{{user.name}}====>>quantity: {{user.quantity}}<<====>>{{user.prix}}</span>
+                    <hr>
+                    <button *ngIf="user.quantityacht > 0" class="btn btn-success" (click)="addrow(user.id,user,user.name,user.quantity,user.prix,user.prixachat)">Acheter</button>
+                    <button class="btn btn-success" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
+                    <button class="btn btn-success" (click)="deleteprod(user.id,user.name)">Supprimer</button>
+                    <hr>
+                    <input type="number" class="form-control" name="quantityacht" [(ngModel)]="user.quantityacht" min="1">
+
+                </div>
+                
+                <br>
+                <hr>
+                <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
+            </div> -->
+         
+      </div>
+    </div>
+
+    <form *ngIf="addprd" class="modall">
+        <span class="close" (click)="addprd=false; imgchnge=false;">X</span>
+        <img *ngIf="imgchnge" [src]="newprod.clnimg" alt="clnimg">
+        <br>
+        <label for="clnimg">l'image</label>
+        <input class="form-control" type="file" name="clnimg" [(ngModel)]="newprod.clnimg" (change)="imgadd()">
+        <hr>
+        
+        <label for="name">le nom</label>
+        <input class="form-control" type="text" name="name" [(ngModel)]="newprod.name">
+        <hr>
+        
+        <label for="ice">Ice</label>
+        <input class="form-control" type="text" name="ice" [(ngModel)]="newprod.ice">
+        <hr>
+        
+        <label for="addfact">Address de facturation</label>
+        <input class="form-control" type="text" name="addfact" [(ngModel)]="newprod.addfact">
+        <hr>
+
+        <label for="addlaivr">Address de laivraison</label>
+        <input class="form-control" type="text" name="addlaivr" [(ngModel)]="newprod.addlaivr">
+        <hr>
+
+        <label for="plafond">Plafond</label>
+        <input class="form-control" type="text" name="plafond" [(ngModel)]="newprod.plafond">
+        <hr>
+        <label for="solde">Solde</label>
+        <input class="form-control" type="text" name="solde" [(ngModel)]="newprod.solde">
+        <hr>
+        <label for="tel">Téléphone</label>
+        <input class="form-control" type="text" name="tel" [(ngModel)]="newprod.tel">
+        <hr>
+        <button class="btn btn-success" (click)="addprod()">Ajouter</button>
+    </form>
+
+    <section *ngIf="update" class="modall">
+        <span class="close" (click)="update=false">X</span>
+        <img [src]="clnimg" alt="clnimg">
+        <br>
+        <label for="clnimgmodal">changer l'image</label>
+        <input class="form-control" type="file" name="clnimgmodal" [(ngModel)]="clnimgmodal" (change)="imgchange()">
+        <hr>
+        
+        <label for="namemodal">changer le nom</label>
+        <input class="form-control" type="text" name="namemodal" [(ngModel)]="namemodal">
+        <hr>
+        
+        <label for="icemodal">Ice</label>
+        <input class="form-control" type="text" name="icemodal" [(ngModel)]="icemodal">
+        <hr>
+        
+        <label for="addfactmodal">Address de facturation</label>
+        <input class="form-control" type="text" name="addfactmodal" [(ngModel)]="addfactmodal">
+        <hr>
+
+        <label for="addlaivrmodal">Address de laivraison</label>
+        <input class="form-control" type="text" name="addlaivrmodal" [(ngModel)]="addlaivrmodal">
+        <hr>
+
+        <label for="plafondmodal">Plafond</label>
+        <input class="form-control" type="text" name="plafondmodal" [(ngModel)]="plafondmodal">
+        <hr>
+        <label for="soldemodal">Solde</label>
+        <input class="form-control" type="text" name="soldemodal" [(ngModel)]="soldemodal">
+        <hr>
+        <label for="telmodal">Téléphone</label>
+        <input class="form-control" type="text" name="telmodal" [(ngModel)]="telmodal">
+        <hr>
+        <button class="btn btn-success" (click)="updateInfoBD()">Modifier</button>
+    </section>
+  </div>

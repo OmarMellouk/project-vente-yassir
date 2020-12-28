@@ -24,9 +24,13 @@
                 <a class="nav-link" routerLink="/achat">Achat</a>
          
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/stock">Stock</a>
-         
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link contact">Stock</a>
+                <div class="dropdown-content">
+                    <li><a routerLink="/stock">Jornal</a></li>
+                    <li><a routerLink="/stockinv">Inventaire</a></li>
+                </div>    
               </li>
 
               <li class="nav-item">
@@ -42,6 +46,14 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/produit">Produits</a>
      
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link contact">Contact</a>
+                <div class="dropdown-content">
+                    <li><a routerLink="/client">Client</a></li>
+                    <li><a routerLink="/fournisseur">Fournisseur</a></li>
+                </div>    
               </li>
          
               <li class="nav-item" >

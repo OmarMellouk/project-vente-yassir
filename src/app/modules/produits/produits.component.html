@@ -30,11 +30,10 @@
                     <div class="prod_class">
                         <img [src]="user.prodimg" alt="prodimg">
                         <p>{{user.name}}</p>
-                        <p>quantity: {{user.quantity}}</p>
                         <p>{{user.prix}} DH</p>
                         <span>{{user.ref}}</span>
                         <hr>
-                        <button class="btn btn-success form-control" (click)="updateInfo(user.id,user.prodimg,user.name,user.quantity,user.prix,user.prixachat)">Modifier</button>
+                        <button class="btn btn-success form-control" (click)="updateInfo(user.id,user.prodimg,user.name,user.qntttc,user.qntnoir,user.prix,user.prixachat,user.ref,user.cat,user.unit)">Modifier</button>
                         <button class="btn btn-success form-control" (click)="deleteprod(user.id,user.name)">Supprimer</button>
                     </div>
                 </div>
@@ -45,7 +44,7 @@
                 <hr>
                 <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
             </div>
-            <div *ngIf="searchhidden" class="row">
+            <!-- <div *ngIf="searchhidden" class="row">
      
                 <div class="col-sm-4" *ngFor="let user of rowssearch | paginate : {id:'listprod' ,itemsPerPage:5,currentPage:p} ; let i=index" >
                     <img [src]="user.prodimg" alt="prodimg">
@@ -62,7 +61,7 @@
                 <br>
                 <hr>
                 <pagination-controls id="listprod" (pageChange)="p = $event"></pagination-controls>
-            </div>
+            </div> -->
          
       </div>
     </div>
@@ -79,15 +78,26 @@
         <input class="form-control" type="text" name="name" [(ngModel)]="newprod.name">
         <hr>
         
-        <label for="quantity">la quantité</label>
-        <input class="form-control" type="text" name="quantity" [(ngModel)]="newprod.quantity">
+        <label for="qntttc">la quantité TTC</label>
+        <input class="form-control" type="text" name="qntttc" [(ngModel)]="newprod.qntttc">
+        <hr>
+        <label for="qntnoir">la quantité noir</label>
+        <input class="form-control" type="text" name="qntnoir" [(ngModel)]="newprod.qntnoir">
         <hr>
         
         <label for="prix">le prix de vente</label>
         <input class="form-control" type="text" name="prix" [(ngModel)]="newprod.prix">
+        <hr>
 
         <label for="prixachat">le prix d'achat</label>
         <input class="form-control" type="text" name="prixachat" [(ngModel)]="newprod.prixachat">
+        <hr>
+
+        <label for="cat">Catégorie</label>
+        <input class="form-control" type="text" name="cat" [(ngModel)]="newprod.cat">
+        <hr>
+        <label for="unit">Unité</label>
+        <input class="form-control" type="text" name="unit" [(ngModel)]="newprod.unit">
         <hr>
         <button class="btn btn-success" (click)="addprod()">Ajouter</button>
     </form>
@@ -104,19 +114,30 @@
         <input class="form-control" type="text" name="namemodal" [(ngModel)]="namemodal">
         <hr>
         
-        <label for="quantitymodal">changer la quantité</label>
-        <input class="form-control" type="text" name="quantitymodal" [(ngModel)]="quantitymodal">
+        <label for="qntttcmodal">changer la quantité TTC</label>
+        <input class="form-control" type="text" name="qntttcmodal" [(ngModel)]="qntttcmodal">
+        <hr>
+        <label for="qntnoirmodal">changer la quantité noir</label>
+        <input class="form-control" type="text" name="qntnoirmodal" [(ngModel)]="qntnoirmodal">
         <hr>
         
         <label for="prixmodal">le prix de vente</label>
         <input class="form-control" type="text" name="prixmodal" [(ngModel)]="prixmodal">
+        <hr>
 
         <label for="prixachatmodal">le prix d'achat</label>
         <input class="form-control" type="text" name="prixachatmodal" [(ngModel)]="prixachatmodal">
         <hr>
+
+        <label for="refmodal">Code à bare</label>
+        <input class="form-control" type="text" name="refmodal" [(ngModel)]="refmodal">
+        <hr>
+        <label for="catmodal">Catégorie</label>
+        <input class="form-control" type="text" name="catmodal" [(ngModel)]="catmodal">
+        <hr>
+        <label for="unitmodal">Unité</label>
+        <input class="form-control" type="text" name="unitmodal" [(ngModel)]="unitmodal">
+        <hr>
         <button class="btn btn-success" (click)="updateInfoBD()">Modifier</button>
     </section>
   </div>
-
-<!-- <br><br><br><br><br><br><br><br>
-<app-footer></app-footer> -->

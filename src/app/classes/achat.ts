@@ -5,5 +5,8 @@ export class Achat{
     quantity:number;
     prix:number;
     prixvent:number;
+    ttc:number;
+    noir:number;
+    frn:String;
 
 }

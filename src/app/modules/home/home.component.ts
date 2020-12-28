@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Produit } from 'src/app/classes/produits';
 import { ProduitService } from 'src/app/services/produit.service';
 import 'rxjs/add/operator/filter';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,12 @@ export class HomeComponent implements OnInit {
   produits: Observable<Produit[]>;
   newprod = new Produit();
   newrow = new Produit();
+  newrowtn = new Produit();
   rows: Array<any> = [];
   rowstst: Array<any> = [];
   rowststg: Array<any> = [];
   rowssearch: Array<any> = [];
+  rowscln: Array<any> = [];
   rowupdate= new Produit();
   totalprix:number = 0;
   totalprixachat:number = 0;
@@ -43,19 +46,23 @@ export class HomeComponent implements OnInit {
  
   i:number = 0;
   p :number = 1;
+  searchcode : any;
   searchname : any;
-  searchqnt : any;
-  searchprix : any;
   qntacht:number = 1;
 
-  nameinput:boolean = false;
-  qntinput:boolean = false;
-  prixinput:boolean = false;
+  codebare:boolean = false;
+  codename:boolean = false;
 
-  constructor( private produitService: ProduitService , public prodchange: ProduitService) {}
+  newcln:string;
+
+  qntttc:number;
+  qntnoir:number;
+
+  constructor( public produitService: ProduitService , public prodchange: ProduitService , public clnservice: ClientService) {}
 
   ngOnInit() {
     this.reloadData2();
+    this.reloadcln();
     this.rows = JSON.parse(localStorage.getItem("token"));
     this.totalprix = JSON.parse(localStorage.getItem("tokenprix"));
     this.totalprixachat = JSON.parse(localStorage.getItem("tokenprixachat"));
@@ -70,6 +77,12 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  reloadcln() {
+    this.clnservice.getClient().subscribe(res => 
+      {
+          this.rowscln = res;
+      });
+  }
   addprod(){
     this.produitService.addProduit(this.newprod).subscribe(()=>this.reloadData2());
     this.addprd=false;
@@ -77,27 +90,28 @@ export class HomeComponent implements OnInit {
   }
 
 
-  addrow(id, prod, name, quantity, quantityacht, prix, prixachat){
-    if(prod.quantity > 0){
-      prod.quantity = prod.quantity - quantityacht;
-      this.produitService.putProduit(id,prod).subscribe(()=>this.reloadData2());
+  addrow(id, prod, name, qntttc, qntnoir, prix, prixachat){
+    if(prod.qntttc + prod.qntnoir > 0){
+      /* prod.quantity = prod.quantity - quantityacht;
+      this.produitService.putProduit(id,prod).subscribe(()=>this.reloadData2()); */
 
       this.newrow.id= id;
       this.newrow.name= name;
-      this.newrow.quantity= quantity-quantityacht;
-      this.newrow.quantityacht= quantityacht;
-      this.newrow.prix= prix*quantityacht;
-      this.newrow.prixachat= prixachat*quantityacht;
+      this.newrow.qntttc= qntttc;
+      this.newrow.qntnoir= qntnoir;
+      /* this.newrow.quantityacht= quantityacht; */
+      this.newrow.prix= prix;
+      this.newrow.prixachat= prixachat;
       this.rows.push(this.newrow);
       localStorage.setItem("token", JSON.stringify(this.rows));
       this.newrow = new Produit();
 
-      this.totalprix=this.totalprix+prix*quantityacht;
+      /* this.totalprix=this.totalprix+prix*quantityacht;
       this.totalprixachat=this.totalprixachat+prixachat*quantityacht;
       this.totalqnt=this.totalqnt+quantityacht;
       localStorage.setItem("tokenprix", JSON.stringify(this.totalprix));
       localStorage.setItem("tokenprixachat", JSON.stringify(this.totalprixachat));
-      localStorage.setItem("tokenqnt", JSON.stringify(this.totalqnt));
+      localStorage.setItem("tokenqnt", JSON.stringify(this.totalqnt)); */
 
       /* this.prodchange.echangerows = this.rows;
       this.prodchange.echangeprix = this.totalprix; */
@@ -135,7 +149,7 @@ export class HomeComponent implements OnInit {
     this.prodchange.echangeprix = this.totalprix; */
   }
 
-  updateInfo(id ,img, name, quantity, prix, prixachat){
+  /* updateInfo(id ,img, name, quantity, prix, prixachat){
     this.update=true;
     this.id = id;
     this.img = img;
@@ -161,23 +175,23 @@ export class HomeComponent implements OnInit {
     this.rowupdate.prixachat=this.prixachatmodal;
     this.produitService.putProduit(this.id,this.rowupdate).subscribe(()=>this.reloadData2());
     this.update=false;
-  }
+  } */
 
-  imgchange(){
+  /* imgchange(){
     this.img= "../../../assets/imgs/"+this.imgmodal.replace(/C:\\fakepath\\/, '');
   }
   imgadd(){
     this.newprod.prodimg= "../../../assets/imgs/"+this.newprod.prodimg.replace(/C:\\fakepath\\/, '');
     this.imgchnge = true;
-  }
+  } */
 
-  deleteprod(id,name){
+  /* deleteprod(id,name){
     let cf=window.confirm('WACH VRAI BAGHI TSUPRIMER  '+name+ '  ???');
     if(cf==true){
        let resp=this.produitService.deleteProduit(id);
     resp.subscribe(()=>this.reloadData2());
     }  
-  }
+  } */
 
   /* Search(){ 
     if(this.search === ""){
@@ -193,38 +207,41 @@ export class HomeComponent implements OnInit {
      
   } */
 
+  
+  Searchcode(){ 
+    
+    if(this.searchcode != ""){
+      this.rowststg = this.rowststg.filter(res=>{ 
+        return String(res.ref).match(this.searchcode);
+      });
+    }else{ 
+      this.ngOnInit();
+    }
+    
+  }
+
   Searchname(){ 
     
     if(this.searchname != ""){
       this.rowststg = this.rowststg.filter(res=>{ 
-        return res.name.toLocaleLowerCase().match(this.searchname.toLocaleLowerCase());
+        return String(res.name).match(this.searchname);
       });
     }else{ 
       this.ngOnInit();
     }
     
   }
-  Searchqnt(){ 
-    
-    if(this.searchqnt != ""){
-      this.rowststg = this.rowststg.filter(res=>{ 
-        return String(res.quantity).match(this.searchqnt);
-      });
-    }else{ 
-      this.ngOnInit();
-    }
-    
+
+  inpttc(prod){
+    this.newrowtn = prod;
+    this.newrowtn.qntttc = this.newrowtn.qntttc - this.qntttc;
+    this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
   }
-  Searchprix(){ 
-    
-    if(this.searchprix != ""){
-      this.rowststg = this.rowststg.filter(res=>{ 
-        return String(res.prix).match(this.searchprix);
-      });
-    }else{ 
-      this.ngOnInit();
-    }
-    
+
+  inpnoir(prod){
+    this.newrowtn = prod;
+    this.newrowtn.qntnoir = this.newrowtn.qntnoir - this.qntnoir;
+    this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
   }
 
 }

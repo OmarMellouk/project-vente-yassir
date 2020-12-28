@@ -2,17 +2,40 @@
 
 <br><br><br><br><br><br><br><br>
 
-
-<div class="container">
-    <button class="moin" (click)="mnprd = true">-</button>
-    <button class="plus" (click)="addprd = true">+</button>
+<div class="row">
+    <div class="col-sm-4">
+        <table id="customers" class="table">
+            <thead>
+                <tr>
+                    <th><label>Caisse</label></th>
+                    <th><label>Date</label></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let row of jorcaisse; let j = index">
+                    <td>{{row.name}}</td>
+                    <td>{{row.date}}</td>
+                    <td><button class="btn btn-success" (click)="ovr(jorcaisse)">Ouvrire</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="col-sm-8">
+    <button class="btn btn-success" (click)="ferm()">fermeture de la caisse</button>
+    <hr>
+    <button class="moin btn btn-success" (click)="mnprd = true">-</button>
+    <button class="plus btn btn-success" (click)="addprd = true">+</button>
     <br>
     <hr>
-    <label for="firstdate">Date de début</label>
-    <input type="datetime-local" class="form-control" name="firstdate" [(ngModel)]="firstdate" >
-    <label for="lastdate">Date de fin</label>
-    <input type="datetime-local" class="form-control" name="lastdate" [(ngModel)]="lastdate" >
-    <button class="form-control" (click)="Searchdate()">Chercher</button>
+    <label for="firstdate">Date de début : </label>
+    <input type="datetime-local"  name="firstdate" [(ngModel)]="firstdate" >
+    <br>
+    <label for="lastdate">Date de fin : </label>
+    <input type="datetime-local"  name="lastdate" [(ngModel)]="lastdate" >
+    <br>
+    <button class="btn btn-success" (click)="Searchdate()">Chercher</button>
+    <br>
     <div class="row" >
         <table id="customers" class="table">
             <thead>
@@ -82,3 +105,4 @@
         <button class="btn btn-success" (click)="mnplus()">Ajouter</button>
     </form>
   </div>
+    </div>

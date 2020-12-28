@@ -2,23 +2,41 @@
 
 <br><br><br><br><br><br><br><br>
 
-<div class="container">
+<div>
     <div class="row">
       <div class="col-sm-4">
         <table id="customers" class="table">
             <thead>
                 <tr>
-                    <th><label>Quantité</label></th>
+                    <th><label>Client</label></th>
                     <th><label>Produit</label></th>
                     <th><label>Prix</label></th>
+                    <th><label>ttc</label></th>
+                    <th><label>noir</label></th>
+                    <th><label>Qnt</label></th>
+                    <th><label>Prix total</label></th>
                     <th><label>Supprimer</label></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let row of rows; let i = index">
-                    <td>{{row.quantityacht}}</td>
+                    <td>
+                        <select name="frn" [(ngModel)]="newcln">
+                            <option  *ngFor="let row of rowscln; let i = index" [ngValue]="row.name">{{row.name}}</option>
+                        </select>
+                    </td>
                     <td>{{row.name}}</td>
                     <td>{{row.prix}}</td>
+                    <td>
+                        <tr><input type="number" class="form-control" name="qntttc" [(ngModel)]="qntttc" (input)="inpttc(row)" min="0"></tr>
+                        <tr>{{row.qntttc}}</tr>
+                    </td>
+                    <td>
+                        <tr><input type="number" class="form-control" name="qntnoir" [(ngModel)]="qntnoir" (input)="inpnoir(row)" min="0"></tr>
+                        <tr>{{row.qntnoir}}</tr>
+                    </td>
+                    <td></td>
+                    <td></td>
                     <td class="delete d-flex justify-content-center">
                         <img src="../../../assets/imgs/delete.webp" (click)="deleterow(i, row.id, row.prix, row.prixachat, row.quantityacht)" alt="delete">
                     </td>
@@ -33,19 +51,33 @@
           
         
             <div class="row">
-      
+                <nav class="navbar">
+            
+                    <div class="dropdown">
+                        <button class="dropbtn">Rechercher par :</button>
+                        <div class="dropdown-content">
+                            <li (click)="codebare = true; codename = false;">Code à bare</li>
+                            <li (click)="codename = true; codebare = false;">Nom</li>
+                        </div>
+                    </div>
+                    <hr>
+                    <input *ngIf="codebare" type="text" class="form-control" name="searchcode" [(ngModel)]="searchcode" (input)="Searchcode()" placeholder="Recherche par code à bare">
+                    <input *ngIf="codename" type="text" class="form-control" name="searchname" [(ngModel)]="searchname" (input)="Searchname()" placeholder="Recherche par nom">
+                   
+                </nav>
+                <hr>
                 <div class="col-sm-2" *ngFor="let user of rowststg | paginate : {id:'listprod' ,itemsPerPage:50,currentPage:p} ; let i=index" >
                     <div class=" prod_class">
-                        <img [src]="user.prodimg" alt="prodimg">
+                        <img [src]="user.prodimg" alt="prodimg" (click)="addrow(user.id,user,user.name,user.qntttc,user.qntnoir,user.prix,user.prixachat)">
                         <p>{{user.name}}</p>
                         
                         <p>{{user.prix}} DH</p>
                         <span>{{user.ref}}</span>
                         <hr>
-                        <button *ngIf="user.quantityacht > 0" class="btn btn-success form-control" (click)="addrow(user.id,user,user.name,user.quantity,user.quantityacht,user.prix,user.prixachat)">Vendre</button>
-                        <hr>
+                        <!-- <button *ngIf="user.quantityacht > 0" class="btn btn-success form-control" (click)="addrow(user.id,user,user.name,user.quantity,user.quantityacht,user.prix,user.prixachat)">Vendre</button> -->
+                        <!-- <hr>
                         <label for="quantityacht">La quantité vendre</label>
-                        <input type="number" class="form-control" name="quantityacht" [(ngModel)]="user.quantityacht" min="1">
+                        <input type="number" class="form-control" name="quantityacht" [(ngModel)]="user.quantityacht" min="1"> -->
                     </div>
                 </div>
                 

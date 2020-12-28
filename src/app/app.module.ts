@@ -21,6 +21,9 @@ import { ProduitsComponent } from './modules/produits/produits.component';
 import { Caisse2Component } from './modules/caisse2/caisse2.component';
 import { AchatComponent } from './modules/achat/achat.component';
 import { StockComponent } from './modules/stock/stock.component';
+import { ClientComponent } from './modules/client/client.component';
+import { FournisseurComponent } from './modules/fournisseur/fournisseur.component';
+import { StockinvComponent } from './modules/stockinv/stockinv.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { StockComponent } from './modules/stock/stock.component';
     ProduitsComponent,
     Caisse2Component,
     AchatComponent,
-    StockComponent
+    StockComponent,
+    ClientComponent,
+    FournisseurComponent,
+    StockinvComponent
   ],
   imports: [
     BrowserModule,
