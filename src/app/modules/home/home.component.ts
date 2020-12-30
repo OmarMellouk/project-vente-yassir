@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Produit } from 'src/app/classes/produits';
 import { ProduitService } from 'src/app/services/produit.service';
@@ -11,6 +11,12 @@ import { ClientService } from 'src/app/services/client.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('b1') b1: ElementRef;
+  @ViewChild('inp') inp: ElementRef;
+  @ViewChild('b2') b2: ElementRef;
+  @ViewChild('inp2') inp2: ElementRef;
+
 
   produits: Observable<Produit[]>;
   newprod = new Produit();
@@ -236,12 +242,43 @@ export class HomeComponent implements OnInit {
     this.newrowtn = prod;
     this.newrowtn.qntttc = this.newrowtn.qntttc - this.qntttc;
     this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
+
+    localStorage.setItem("token", JSON.stringify(this.rows));
+    
+    this.b1.nativeElement.disabled = true;
+    this.inp.nativeElement.disabled = true;
+  }
+  initc(prod){
+    this.newrowtn = prod;
+    this.newrowtn.qntttc = this.newrowtn.qntttc + this.qntttc;
+    this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
+
+    localStorage.setItem("token", JSON.stringify(this.rows));
+    this.qntttc = null;
+    this.b1.nativeElement.disabled = false;
+    this.inp.nativeElement.disabled = false;
   }
 
   inpnoir(prod){
     this.newrowtn = prod;
     this.newrowtn.qntnoir = this.newrowtn.qntnoir - this.qntnoir;
     this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
+
+    localStorage.setItem("token", JSON.stringify(this.rows));
+    
+    this.b2.nativeElement.disabled = true;
+    this.inp2.nativeElement.disabled = true;
+  }
+
+  initn(prod){
+    this.newrowtn = prod;
+    this.newrowtn.qntnoir = this.newrowtn.qntnoir + this.qntnoir;
+    this.produitService.putProduit(this.newrowtn.id,this.newrowtn).subscribe(()=>this.reloadData2());
+
+    localStorage.setItem("token", JSON.stringify(this.rows));
+    this.qntnoir = null;
+    this.b2.nativeElement.disabled = false;
+    this.inp2.nativeElement.disabled = false;
   }
 
 }

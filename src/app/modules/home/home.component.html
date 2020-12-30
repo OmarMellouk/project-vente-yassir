@@ -28,24 +28,32 @@
                     <td>{{row.name}}</td>
                     <td>{{row.prix}}</td>
                     <td>
-                        <tr><input type="number" class="form-control" name="qntttc" [(ngModel)]="qntttc" (input)="inpttc(row)" min="0"></tr>
-                        <tr>{{row.qntttc}}</tr>
+                        <tr><input #inp type="number" class="form-control" name="qntttc" [(ngModel)]="qntttc" min="0"></tr>
+                        <tr>{{row.qntttc}} 
+                            <br>
+                            <button #b1 class="btn btn-success" (click)="inpttc(row)">V</button>
+                            <button class="btn btn-success" (click)="initc(row)">R</button>
+                        </tr>
                     </td>
                     <td>
-                        <tr><input type="number" class="form-control" name="qntnoir" [(ngModel)]="qntnoir" (input)="inpnoir(row)" min="0"></tr>
-                        <tr>{{row.qntnoir}}</tr>
+                        <tr><input #inp2 type="number" class="form-control" name="qntnoir" [(ngModel)]="qntnoir" min="0"></tr>
+                        <tr>{{row.qntnoir}}
+                            <br>
+                            <button #b2 class="btn btn-success" (click)="inpnoir(row)">V</button>
+                            <button class="btn btn-success" (click)="initn(row)">R</button>
+                        </tr>
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td>{{qntttc+qntnoir}}</td>
+                    <td>{{(qntttc+qntnoir)*row.prix}}</td>
                     <td class="delete d-flex justify-content-center">
                         <img src="../../../assets/imgs/delete.webp" (click)="deleterow(i, row.id, row.prix, row.prixachat, row.quantityacht)" alt="delete">
                     </td>
                 </tr>
             </tbody>
         </table>
-        <span *ngIf="totalprix > 0">Prix total :  {{totalprix}}</span>
+       <!--  <span >Prix total :  {{totalprix}}</span>
         <hr>
-        <a *ngIf="totalprix > 0" class="btn btn-success" routerLink="/buyprod">Vendre</a>
+        <a  class="btn btn-success" routerLink="/buyprod">Vendre</a> -->
       </div>
       <div class="col-sm-8" >
           
